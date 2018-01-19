@@ -23,6 +23,10 @@
 # [*user*]
 #   The user name to exec the composer commands as. Default is undefined.
 #
+# [*update_schedule*]
+#   Specify a `schedule` resource to execute the update only in a
+#   specified time range.
+#
 # === Authors
 #
 # Thomas Ploch <profiploch@gmail.com>
@@ -32,14 +36,14 @@
 # Copyright 2013-2014 Thomas Ploch
 #
 define composer::selfupdate(
-  $version       = undef,
-  $rollback      = false,
-  $clean_backups = false,
-  $user          = undef,
-  $logoutput     = false,
-  $timeout       = 300,
-  $tries         = 3,
-  $schedule      = undef,
+  $version         = undef,
+  $rollback        = false,
+  $clean_backups   = false,
+  $user            = undef,
+  $logoutput       = false,
+  $timeout         = 300,
+  $tries           = 3,
+  $update_schedule = undef,
 ) {
   require ::composer
 
@@ -84,6 +88,6 @@ define composer::selfupdate(
     tries    => $tries,
     timeout  => $timeout,
     user     => $user,
-    schedule => $schedule,
+    schedule => $update_schedule,
   }
 }
