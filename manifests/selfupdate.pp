@@ -47,7 +47,8 @@ define composer::selfupdate(
 ) {
   require ::composer
 
-  validate_bool($rollback, $clean_backups)
+  validate_legacy(Boolean, 'validate_bool', $rollback)
+  validate_legacy(Boolean, 'validate_bool', $clean_backups)
 
   if $version == undef and $rollback == true {
     fail('You cannot use rollback without specifying a version')
@@ -65,7 +66,7 @@ define composer::selfupdate(
   $base_command = "${composer::php_bin} ${composer_path} selfupdate"
 
   if $version != undef {
-    validate_string($version)
+    validate_legacy(String, 'validate_string', $version)
     $version_arg = " ${version}"
   } else {
     $version_arg = ''
